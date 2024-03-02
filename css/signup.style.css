@@ -189,5 +189,8 @@ button {
         display: flex; 
         padding: 12px 24px;
     }
+    div.main{
+        width: 325px;
+    }
 
 }
