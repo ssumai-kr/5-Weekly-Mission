@@ -61,10 +61,24 @@
     line-height: normal;
 }
 
+.inputforms {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.loginform,
+.passwordform {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
 label {
-    margin-top: 24px;
     width: 400px;
-    height: 89px;
+    height: 17px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -77,23 +91,27 @@ label {
 }
 
 input {
-    width: 100%;
-    height: 100%;
+    display: flex;
+    width: 400px;
+    padding: 18px 15px;
+    justify-content: center;
+    align-items: center;
     border-radius: 8px;
     border: 1px solid var(--Linkbrary-gray20, #CCD5E3);
     background: var(--Linkbrary-white, #FFF);
-    padding: 18px 15px;
-    color: var(--Linkbrary-gray100, #373740);
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
-    /* 150% */
 }
 
 input:focus {
     outline: 1px solid #6D6AFE;
+}
+
+div.main{
+    position: relative;
+}
+div.main i{
+    position: absolute;
+    right: 15px;
+    top: 18px;
 }
 
 button {
@@ -113,6 +131,7 @@ button {
     cursor: pointer;
 }
 
+
 .sns_login {
     height: 66px;
     width: 100%;
@@ -125,7 +144,6 @@ button {
     border: 1px solid var(--Linkbrary-gray20, #CCD5E3);
     background: var(--Linkbrary-gray10, #E7EFFB);
 }
-
 .sns_login p {
     color: var(--Linkbrary-gray100, #373740);
     font-family: Pretendard;
@@ -150,4 +168,31 @@ button {
     border-radius: 50%;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border: 1px solid #D3D4DD;
+}
+
+
+
+@media (max-width: 767px) {
+    .signup_form {
+        width: 325px;
+        height: 506;
+        margin: 120px auto 0px auto;
+    }
+    input {
+        width: 325px;
+        height: 60px;
+    }
+    .sns_login {
+        height: 66px;
+        width: 325px;
+        display: flex;
+    
+        padding: 12px 24px;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 8px;
+        border: 1px solid var(--Linkbrary-gray20, #CCD5E3);
+        background: var(--Linkbrary-gray10, #E7EFFB);
+    }
+
 }
