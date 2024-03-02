@@ -99,6 +99,7 @@ input {
     border-radius: 8px;
     border: 1px solid var(--Linkbrary-gray20, #CCD5E3);
     background: var(--Linkbrary-white, #FFF);
+    margin-top: 12px;
 }
 
 input:focus {
@@ -185,14 +186,8 @@ button {
     .sns_login {
         height: 66px;
         width: 325px;
-        display: flex;
-    
+        display: flex; 
         padding: 12px 24px;
-        justify-content: space-between;
-        align-items: center;
-        border-radius: 8px;
-        border: 1px solid var(--Linkbrary-gray20, #CCD5E3);
-        background: var(--Linkbrary-gray10, #E7EFFB);
     }
 
 }
