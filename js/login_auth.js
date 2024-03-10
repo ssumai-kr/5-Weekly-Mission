@@ -54,14 +54,12 @@ function check_to_login(event) {
     // 이메일과 비밀번호 입력 확인
     if (Emailinput.value === '' || PWinput.value === '') {
         // 이메일 또는 비밀번호가 입력되지 않은 경우
-        // emailErrorMessage.textContent = '이메일을 입력해주세요.';
-        // pwErrorMessage.textContent = '비밀번호를 입력해주세요.';
-        // Emailinput.classList.add('input_error');
-        // EmailForm.lastElementChild.append(emailErrorMessage);
-        // PWinput.classList.add('input_error');
-        // PwForm.lastElementChild.append(pwErrorMessage);
-        check_pw_focusout();
-        check_email_focusout();
+        emailErrorMessage.textContent = '이메일을 입력해주세요.';
+        pwErrorMessage.textContent = '비밀번호를 입력해주세요.';
+        Emailinput.classList.add('input_error');
+        EmailForm.lastElementChild.append(emailErrorMessage);
+        PWinput.classList.add('input_error');
+        PwForm.lastElementChild.append(pwErrorMessage);
         event.preventDefault();
         return;
     }
