@@ -8,8 +8,8 @@ const pwErrorMessage = document.createElement('p');  //비밀번호 입력 오�
 
 const login_button = document.querySelector('.login_button'); //로그인 버튼
 
-const Manage_ID = "test@codeit.com";
-const Manage_PW = "codeit101"; 
+const MANAGE_ID = "test@codeit.com";
+const MANAGE_PW = "codeit101"; 
 
 function check_email_focusout() { //이메일 유효성 검사
     if (Emailinput.value === '') {
@@ -42,7 +42,7 @@ function check_pw_focusout() { //비밀번호 유효성 검사
         PwForm.lastElementChild.append(pwErrorMessage);
     }
     else {
-        PWinputinput.classList.remove('input_error');
+        PWinput.classList.remove('input_error');
     }
 }
 function check_pw_focusin() {
@@ -73,7 +73,7 @@ function check_to_login(event) {
     }
 
     // 아이디와 비밀번호 확인
-    if (Emailinput.value !== Manage_ID || PWinput.value !== Manage_PW) {
+    if (Emailinput.value !== MANAGE_ID || PWinput.value !== MANAGE_PW) {
         // 아이디 또는 비밀번호가 일치하지 않는 경우
         emailErrorMessage.textContent = '이메일을 확인해주세요.';
         pwErrorMessage.textContent = '비밀번호를 확인해주세요.';
