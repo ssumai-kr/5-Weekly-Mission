@@ -11,7 +11,7 @@ const login_button = document.querySelector('.login_button'); //로그인 버튼
 const Manage_ID = "test@codeit.com";
 const Manage_PW = "codeit101"; 
 
-function check_email_focusout() {
+function check_email_focusout() { //이메일 유효성 검사
     if (Emailinput.value === '') {
         emailErrorMessage.textContent = '이메일을 입력해주세요.';
         Emailinput.classList.add('input_error');
@@ -35,7 +35,7 @@ function check_email_focusin() {
     emailErrorMessage.textContent = '';
 }
 
-function check_pw_focusout() {
+function check_pw_focusout() { //비밀번호 유효성 검사
     if (PWinput.value === '') {
         pwErrorMessage.textContent = '비밀번호를 입력해주세요.';
         PWinput.classList.add('input_error');
@@ -86,7 +86,7 @@ function check_to_login(event) {
     }
 
     // 로그인 성공 시 페이지 이동 또는 기타 작업 수행
-    window.location.href = "./folder.html";
+    window.location.href = "folder.html";
 }
 
 
