@@ -12,7 +12,12 @@ const login_button = document.querySelector('.login_button'); //로그인 버튼
 const MANAGE_ID = "test@codeit.com";
 const MANAGE_PW = "sprint101";
 
-
+window.onload = function () {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+        location.href = '../folder.html';
+    }
+};
 
 
 function check_email_focusout() { //이메일 유효성 검사
@@ -112,29 +117,32 @@ async function check_to_login(event) {
     }
 }
 
-function signinPost(url, values) {
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-    })
-    .then(response => {
+async function signinPost(url, values) {
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values),
+        });
+
         if (response.ok) {
-            const responseData = response.json(); // 응답 데이터를 JSON 형식으로 파싱
-            const accessToken = responseData.accessToken; // 응답 데이터에서 access token 추출
-            localStorage.setItem("access-token", accessToken);
-            // 페이지 이동
-            window.location.href = "folder.html";
+            const data = await response.json();
+            if (data && data.data.accessToken) {
+                localStorage.setItem('accessToken', data.data.accessToken);
+                window.location.href = "folder.html";
+            } else {
+                console.error('accessToken이 응답에 없습니다.');
+            }
         } else {
             console.error('Fetch 요청이 실패하였습니다. HTTP 상태 코드:', response.status);
         }
-    })
-    .catch(error => {
+    } catch (error) {
         console.error('Fetch 요청 처리 중 에러가 발생하였습니다:', error);
-    });
+    }
 }
+
 Emailinput.addEventListener('focusout', check_email_focusout);
 Emailinput.addEventListener('focusin', check_email_focusin);
 PWinput.addEventListener('focusout', check_pw_focusout);

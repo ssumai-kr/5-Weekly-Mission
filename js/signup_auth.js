@@ -11,6 +11,14 @@ const signupBtn = document.querySelector('.signup-button');
 const MANAGE_ID = "test@codeit.com";
 const MANAGE_PW = "codeit101";
 
+window.onload = function () {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+        location.href = '../folder.html';
+    }
+};
+
+
 function check_email_focusout() { //이메일 유효성 검사
     if (Emailinput.value === '') {
         emailErrorMessage.textContent = '이메일을 입력해주세요.';
@@ -30,9 +38,6 @@ function check_email_focusout() { //이메일 유효성 검사
             Emailinput.classList.remove('input_error');
         }
     }
-
-
-
 }
 
 function check_email_focusin() {
@@ -201,10 +206,9 @@ async function signupPost(values) {
             // 페이지 이동
             console.log(response);
 
-            const responseData = await response.json(); // 응답 데이터를 JSON 형식으로 파싱
-            const accessToken = responseData.accessToken; // 응답 데이터에서 access token 추출
-            localStorage.setItem("access-token", accessToken);
-            console.log('accessToken', accessToken);
+            const data = await response.json();
+            localStorage.setItem('accessToken', data.data.accessToken);
+            if(data.data.accessToken) window.location.href = "folder.html";
           
             // 추출한 access token을 로컬 스토리지에 저장
             // window.location.href = "folder.html";
