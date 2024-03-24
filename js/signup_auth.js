@@ -84,12 +84,12 @@ function check_checkpw_focusin() {
     checkPwErrorMessage.textContent = '';
 }
 
-function check_to_signup(e) {
+async function check_to_signup(e) {
     e.preventDefault(); // 기본 이벤트 방지
 
 
     // 이메일 유효성 검사
-    if (Emailinput.value === '' && PWinput.value === '' ) {
+    if (Emailinput.value === '' && PWinput.value === '') {
         emailErrorMessage.textContent = '이메일을 입력해주세요.';
         Emailinput.classList.add('input_error');
         EmailForm.lastElementChild.append(emailErrorMessage);
@@ -98,7 +98,7 @@ function check_to_signup(e) {
         PasswordForm.lastElementChild.append(pwErrorMessage);
         return;
     }
-    else if(Emailinput.value === '') {
+    else if (Emailinput.value === '') {
         emailErrorMessage.textContent = '이메일을 입력해주세요.';
         Emailinput.classList.add('input_error');
         EmailForm.lastElementChild.append(emailErrorMessage);
@@ -110,23 +110,19 @@ function check_to_signup(e) {
         PasswordForm.lastElementChild.append(pwErrorMessage);
         return;
     }
-    if (Emailinput.value === MANAGE_ID) {
-        emailErrorMessage.textContent = '이미 사용중인 이메일입니다.';
-        Emailinput.classList.add('input_error');
-        EmailForm.lastElementChild.append(emailErrorMessage);
-        return;
-    }
+    // if (Emailinput.value === MANAGE_ID) {
+    //     emailErrorMessage.textContent = '이미 사용중인 이메일입니다.';
+    //     Emailinput.classList.add('input_error');
+    //     EmailForm.lastElementChild.append(emailErrorMessage);
+    //     return;
+    // }
     let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
     if (!emailRegex.test(Emailinput.value)) {
         emailErrorMessage.textContent = "올바른 이메일 주소가 아닙니다.";
         Emailinput.classList.add('input_error');
         EmailForm.lastElementChild.append(emailErrorMessage);
         return;
-    } 
-    // else {
-    //     Emailinput.classList.remove('input_error');
-    // }
-
+    }
 
     // 비밀번호 유효성 검사
     if (PWinput.value === '') {
@@ -147,11 +143,72 @@ function check_to_signup(e) {
         PasswordForm.lastElementChild.append(pwErrorMessage);
         return;
     }
+    const url = 'https://bootcamp-api.codeit.kr/api/check-email';
+    const values = {
+        checkemail: {
+            email: Emailinput.value,
+        },
+        emailAndPassword: {
+            email: Emailinput.value,
+            password: PWinput.value,
+        },
+    };
+    try {
+        await checkEmailPost(url, values);
+    } catch (error) {
+        console.error('Fetch 요청 중 에러가 발생하였습니다:', error);
+        alert('잘못된 요청입니다.');
+    }
 
-    window.location.href = "folder.html";
 }
 
+function checkEmailPost(url, values) {
+    console.log(values);
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values.checkemail),
+    })
+        .then(response => {
+            if (response.ok) {
+                // 페이지 이동
+                signupPost(values);
+            } else {
+                console.error('Fetch 요청이 실패하였습니다. HTTP 상태 코드:', response.status);
+                alert('중복된 이메일입니다.');
+            }
+        })
+        .catch(error => {
+            console.error('Fetch 요청 처리 중 에러가 발생하였습니다:', error);
+            alert('잘못된 요청입니다.');
+        });
+}
 
+async function signupPost(values) {
+    const response = await fetch('https://bootcamp-api.codeit.kr/api/sign-up', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values.emailAndPassword),
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('회원 가입 성공!');
+            // 페이지 이동
+            window.location.href = "folder.html";
+        } else {
+            console.error('Fetch 요청이 실패하였습니다. HTTP 상태 코드:', response.status);
+            alert('회원가입에 실패하였습니다.');
+        }
+    })
+    .catch(error => {
+        console.error('Fetch 요청 처리 중 에러가 발생하였습니다:', error);
+        alert('잘못된 요청입니다.');
+    });
+}
 
 Emailinput.addEventListener('focusout', check_email_focusout);
 Emailinput.addEventListener('focusin', check_email_focusin);
