@@ -187,28 +187,39 @@ function checkEmailPost(url, values) {
 }
 
 async function signupPost(values) {
-    const response = await fetch('https://bootcamp-api.codeit.kr/api/sign-up', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values.emailAndPassword),
-    })
-    .then(response => {
+    try {
+        const response = await fetch('https://bootcamp-api.codeit.kr/api/sign-up', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values.emailAndPassword),
+        });
+
         if (response.ok) {
             alert('회원 가입 성공!');
             // 페이지 이동
-            window.location.href = "folder.html";
+            console.log(response);
+
+            const responseData = await response.json(); // 응답 데이터를 JSON 형식으로 파싱
+            const accessToken = responseData.accessToken; // 응답 데이터에서 access token 추출
+            localStorage.setItem("access-token", accessToken);
+            console.log('accessToken', accessToken);
+          
+            // 추출한 access token을 로컬 스토리지에 저장
+            // window.location.href = "folder.html";
+            // 추출한 access token을 사용하여 보호된 리소스에 대한 요청 보내기 등의 작업 수행
         } else {
             console.error('Fetch 요청이 실패하였습니다. HTTP 상태 코드:', response.status);
             alert('회원가입에 실패하였습니다.');
         }
-    })
-    .catch(error => {
+    } catch (error) {
         console.error('Fetch 요청 처리 중 에러가 발생하였습니다:', error);
         alert('잘못된 요청입니다.');
-    });
+    }
 }
+
+
 
 Emailinput.addEventListener('focusout', check_email_focusout);
 Emailinput.addEventListener('focusin', check_email_focusin);

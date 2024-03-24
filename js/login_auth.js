@@ -122,7 +122,9 @@ function signinPost(url, values) {
     })
     .then(response => {
         if (response.ok) {
-            console.log('Fetch 요청이 성공하였습니다.');
+            const responseData = response.json(); // 응답 데이터를 JSON 형식으로 파싱
+            const accessToken = responseData.accessToken; // 응답 데이터에서 access token 추출
+            localStorage.setItem("access-token", accessToken);
             // 페이지 이동
             window.location.href = "folder.html";
         } else {
