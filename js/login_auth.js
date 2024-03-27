@@ -126,7 +126,6 @@ async function signinPost(url, values) {
             },
             body: JSON.stringify(values),
         });
-
         if (response.ok) {
             const data = await response.json();
             if (data && data.data.accessToken) {
