@@ -1,13 +1,14 @@
 import Header from "./components/header";
-import CardList from "./components/cardlist";
 import FolderTitle from "./components/foldertitle";
+import MainSection from "./components/mainsection";
+import Footer from "./components/footer";
 function App() {
   return (
     <>
       <Header />
       <FolderTitle/>
-      <CardList />
-      
+      <MainSection/>
+      <Footer/>
     </>
   );
 }
