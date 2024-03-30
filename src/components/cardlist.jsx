@@ -1,0 +1,13 @@
+import { useFetch } from "../usefetch";
+import './cardlist.css';
+function CardList() {
+  return (
+    <div className="cardList">
+      <div>검색창</div>
+      <div>카드리스트</div>
+    </div>
+  );
+}
+
+
+export default CardList;
