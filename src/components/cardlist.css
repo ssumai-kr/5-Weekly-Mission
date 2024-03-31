@@ -18,6 +18,10 @@
   }
   
 }
+.CardLink {
+  text-decoration: none;
+}
+
 .CardListItem {
   width: 340px;
   height: 334px;
@@ -79,6 +83,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 24px; /* 150% */
+  text-decoration: none;
 }
 
 .CardInfo__date {
