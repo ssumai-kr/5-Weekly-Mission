@@ -1,6 +1,7 @@
 import "./cardlist.css";
 import { useFetch } from "../usefetch";
 import NoImgae from "../assets/NoImage.svg";
+import { Link } from "react-router-dom";
 
 const second = 1000;
 const minute = second * 60;
@@ -62,26 +63,28 @@ function CardListItem({ item }) {
   const day = creatDate.getDate();
 
   return (
-    <div className="CardListItem">
-      <div className="CardListItem__imgs">
-        {item.imageSource ? (
-          <img
-            src={item.imageSource}
-            alt="카드 이미지"
-            className="CardListItem__img"
-          />
-        ) : (
-          <img src={NoImgae} alt="카드 이미지" className="CardListItem__img" />
-        )}
+    <Link to={item.url ? item.url : '/'}>
+      <div className="CardListItem">
+        <div className="CardListItem__imgs">
+          {item.imageSource ? (
+            <img
+              src={item.imageSource}
+              alt={item.title}
+              className="CardListItem__img"
+            />
+          ) : (
+            <img src={NoImgae} alt={item.title} className="CardListItem__img" />
+          )}
+        </div>
+        <div className="CardInfo">
+          <p className="CardInfo__time">{getElapsedTime(item.createrAt)}</p>
+          <h1 className="CardInfo__title">{item.description}</h1>
+          <p className="CardInfo__date">
+            {year}. {month}. {day}
+          </p>
+        </div>
       </div>
-      <div className="CardInfo">
-        <p className="CardInfo__time">{getElapsedTime(item.createrAt)}</p>
-        <h1 className="CardInfo__title">{item.description}</h1>
-        <p className="CardInfo__date">
-          {year}. {month}. {day}
-        </p>
-      </div>
-    </div>
+    </Link>
   );
 }
 

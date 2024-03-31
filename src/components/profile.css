@@ -21,3 +21,9 @@
   font-weight: 400;
   line-height: normal;
 }
+
+@media (max-width: 767px) {
+  .profileEmail {
+    display: none;
+  }
+}

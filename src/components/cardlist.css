@@ -5,6 +5,19 @@
   margin-bottom: 100px;
 }
 
+@media (max-width: 1124px) {
+  .cardList {
+    grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .cardList {
+    grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+  }
+  
+}
 .CardListItem {
   width: 340px;
   height: 334px;

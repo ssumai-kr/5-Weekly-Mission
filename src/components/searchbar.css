@@ -1,9 +1,12 @@
 .searchBar {
   position: relative;
   width: 1060px;
+  display: flex;
+  justify-content: center;
 }
 
 .searchBar__input {
+  
   display: flex;
   width: 1060px;
   padding: 15px 16px;
@@ -22,4 +25,33 @@
   position: absolute;
   left: 16px;
   top: 15px;
+}
+
+@media (max-width: 1124px) {
+  .searchBar__input {
+    width: 704px;
+  }
+  .searchBar {
+    width: 704px;
+  }
+}
+
+@media (max-width: 767px) {
+  .searchBar__input {
+    width: 325px;
+    height: 43px;
+    display: flex;
+    padding: 15px 16px 15px 40px;
+  }
+  .searchBar {
+    width: 325px;
+    height: 43px;
+  }
+  .searchIcon {
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    left: 15px;
+    top: 12.5px;
+  }
 }
