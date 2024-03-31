@@ -6,4 +6,5 @@
   gap: 40px;
   margin-top: 40px;
   height: 1146px;
+  box-sizing: border-box;
 }

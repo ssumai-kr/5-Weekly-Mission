@@ -2,13 +2,17 @@ import Header from "./components/header";
 import FolderTitle from "./components/foldertitle";
 import MainSection from "./components/mainsection";
 import Footer from "./components/footer";
+import './App.css';
+
 function App() {
   return (
     <>
       <Header />
-      <FolderTitle/>
-      <MainSection/>
-      <Footer/>
+      <div className="PageMain">
+        <FolderTitle />
+        <MainSection />
+      </div>
+      <Footer />
     </>
   );
 }
