@@ -63,7 +63,7 @@ function CardListItem({ item }) {
   const day = creatDate.getDate();
 
   return (
-    <Link to={item.url ? item.url : '/'} className="CardLink">
+    <Link to={item.url ? item.url : "/"} target="blank" className="CardLink">
       <div className="CardListItem">
         <div className="CardListItem__imgs">
           {item.imageSource ? (
