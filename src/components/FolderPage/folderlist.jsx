@@ -28,7 +28,7 @@ function FolderList() {
     "https://bootcamp-api.codeit.kr/api/users/1/folders";
   const total_folders_url = "https://bootcamp-api.codeit.kr/api/users/1/links";
   const other_folders_links =
-    "https://bootcamp-api.codeit.kr/api/users/1/links?folderId={selectedId}";
+    `https://bootcamp-api.codeit.kr/api/users/1/links?folderId=${selectedId}`;
   const folderData = useFetch(other_folders_url);
 
   const handleTitle = (itemName, itemId) => {

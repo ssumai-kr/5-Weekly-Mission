@@ -87,7 +87,7 @@ function CardListItem({ item }) {
         </div>
         <div className="CardInfo">
           <p className="CardInfo__time">{getElapsedTime(creatTime)}</p>
-          <h1 className="CardInfo__title">{item.description}</h1>
+          <p className="CardInfo__title">{item.description ? item.description : item.title}</p>
           <p className="CardInfo__date">
             {year}. {month}. {day}
           </p>
