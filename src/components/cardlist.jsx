@@ -55,7 +55,7 @@ export const getElapsedTime = (createdAt) => {
   return `1 minute ago`;
 };
 
-function CardListItem({ item}) {
+function CardListItem({ item }) {
 
   const creatTime = item.createdAt ? item.createdAt : item.created_at;
   const creatDate = new Date(creatTime);
@@ -65,6 +65,9 @@ function CardListItem({ item}) {
 
   const thumbnail = item.imageSource ? item.imageSource : item.image_source;
 
+  const onErrorImg = (e) => {
+    e.target.src = DefaultImgae;
+  }
 
   return (
     <Link to={item.url ? item.url : "/"} target="blank" className="CardLink">
@@ -76,6 +79,7 @@ function CardListItem({ item}) {
               src={thumbnail}
               alt={item.title}
               className="CardListItem__img"
+              onError={onErrorImg} //404 에러 이미지 기본 이미지로 바꾸기
             />
           ) : (
             <img src={DefaultImgae} alt={item.title} className="CardListItem__img" />
