@@ -1,5 +1,5 @@
 import "./searchbar.css";
-import searchIcon from '../assets/Search.svg';
+import searchIcon from '../../assets/Search.svg';
 function SearchBar() {
   return (
     <form className="searchBar">

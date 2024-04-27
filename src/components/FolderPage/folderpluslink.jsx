@@ -1,5 +1,5 @@
 import styles from "./folderpluslink.module.css";
-import linkImg from '../assets/link.svg';
+import linkImg from '../../assets/link.svg';
 
 function FolderPlusLink() {
   return (

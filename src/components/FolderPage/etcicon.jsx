@@ -1,6 +1,6 @@
-import ShareImg from "../assets/share.svg";
-import PenImg from "../assets/pen.svg";
-import DeleteImg from "../assets/delete.svg";
+import ShareImg from "../../assets/share.svg";
+import PenImg from "../../assets/pen.svg";
+import DeleteImg from "../../assets/delete.svg";
 import styles from './etcicon.module.css';
 function EtcIcon() {
   return (

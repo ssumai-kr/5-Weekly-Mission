@@ -1,9 +1,9 @@
-import { useFetch } from "../usefetch";
+import { useFetch } from "../../usefetch";
 import styles from "./folderlist.module.css";
-import addImg from "../assets/add.svg";
+import addImg from "../../assets/add.svg";
 import { useState } from "react";
 import EtcIcon from "./etcicon";
-import CardList from "./cardlist";
+import CardList from "../cardlist";
 
 function FolderListItem({ children, value, onClick, isActive }) {
   return (
