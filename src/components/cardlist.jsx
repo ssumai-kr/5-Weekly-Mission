@@ -1,6 +1,6 @@
 import "./cardlist.css";
 import { useFetch } from "../usefetch";
-import NoImgae from "../assets/NoImage.svg";
+import DefaultImgae from "../assets/NoImage.svg";
 import { Link } from "react-router-dom";
 
 const second = 1000;
@@ -55,7 +55,7 @@ export const getElapsedTime = (createdAt) => {
   return `1 minute ago`;
 };
 
-function CardListItem({ item, folder = false }) {
+function CardListItem({ item}) {
 
   const creatTime = item.createdAt ? item.createdAt : item.created_at;
   const creatDate = new Date(creatTime);
@@ -78,7 +78,7 @@ function CardListItem({ item, folder = false }) {
               className="CardListItem__img"
             />
           ) : (
-            <img src={NoImgae} alt={item.title} className="CardListItem__img" />
+            <img src={DefaultImgae} alt={item.title} className="CardListItem__img" />
           )}
         </div>
         <div className="CardInfo">
@@ -94,7 +94,7 @@ function CardListItem({ item, folder = false }) {
   );
 }
 
-function CardList({ url }) {
+function CardList({ url, folder = false}) {
   const cardListItems = useFetch(url);
 
   return (
@@ -102,12 +102,12 @@ function CardList({ url }) {
       {cardListItems?.folder?.links.map((link) => (
         <CardListItem key={link.id} item={link} />
       ))}
-      {cardListItems?.data?.length > 0 ? (
+      {(cardListItems?.data?.length > 0)? (
         cardListItems?.data?.map((link) => (
-          <CardListItem key={link.id} item={link} folder={true} />
+          <CardListItem key={link.id} item={link}/>
         ))
       ) : (
-        <div className="NoDataList">저장된 링크가 없습니다.</div>
+        (folder && <div className="NoDataList">저장된 링크가 없습니다.</div>)
       )}
     </div>
   );

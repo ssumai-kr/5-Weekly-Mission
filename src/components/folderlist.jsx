@@ -71,9 +71,9 @@ function FolderList() {
         {title !== "전체" ? <EtcIcon /> : <div></div>}
       </div>
       {title === "전체" ? (
-        <CardList url={total_folders_url} />
+        <CardList url={total_folders_url} folder = {true} />
       ) : (
-        <CardList url={other_folders_links}/>
+        <CardList url={other_folders_links} folder = {true} />
       )}
     </div>
   );
