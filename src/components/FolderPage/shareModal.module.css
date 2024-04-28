@@ -101,6 +101,7 @@
   align-items: flex-start;
   gap: 32px;
   margin-top: 24px;
+  margin-bottom: 32px;
 }
 .share__item {
   display: flex;

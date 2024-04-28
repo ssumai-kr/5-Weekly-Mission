@@ -65,9 +65,6 @@ function ShareModal({ onClick, folderName, currentFolderId }) {
               <span>링크 복사</span>
             </div>
           </div>
-          <button className={styles.Okbtn} onClick={onClick}>
-            공유하기
-          </button>
           <img
             src={CloseImg}
             alt="닫기 버튼 이미지"
