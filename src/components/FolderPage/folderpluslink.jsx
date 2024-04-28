@@ -1,7 +1,7 @@
 import styles from "./folderpluslink.module.css";
 import linkImg from "../../assets/link.svg";
 import { useState } from "react";
-import FolderPlusModal from "./folderPlusModal";
+import FolderPlusModal from "./addToFolder";
 
 function FolderPlusLink() {
   const [showModal, setShowModal] = useState(false);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./folderPlusModal.module.css";
+import styles from "./addToFolder.module.css";
 import Portal from "../../Portal";
 import { useFetch } from "../../usefetch";
 import CheckImg from "../../assets/check.svg";
