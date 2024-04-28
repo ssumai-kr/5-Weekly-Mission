@@ -1,6 +1,6 @@
 import "./cardlist.css";
 import { useFetch } from "../usefetch";
-import NoImgae from "../assets/NoImage.svg";
+import DefaultImgae from "../assets/NoImage.svg";
 import { Link } from "react-router-dom";
 
 const second = 1000;
@@ -56,50 +56,66 @@ export const getElapsedTime = (createdAt) => {
 };
 
 function CardListItem({ item }) {
-  const creatTime = item.createdAt ? item.createdAt : "error";
+
+  const creatTime = item.createdAt ? item.createdAt : item.created_at;
   const creatDate = new Date(creatTime);
   const year = creatDate.getFullYear();
   const month = creatDate.getMonth() + 1;
   const day = creatDate.getDate();
 
+  const thumbnail = item.imageSource ? item.imageSource : item.image_source;
+
+  const onErrorImg = (e) => {
+    e.target.src = DefaultImgae;
+  }
+
   return (
-    <Link to={item.url ? item.url : '/'} className="CardLink">
+    <Link to={item.url ? item.url : "/"} target="blank" className="CardLink">
+      <p>{item.count}</p>
       <div className="CardListItem">
         <div className="CardListItem__imgs">
-          {item.imageSource ? (
+          {thumbnail ? (
             <img
-              src={item.imageSource}
+              src={thumbnail}
               alt={item.title}
               className="CardListItem__img"
+              onError={onErrorImg} //404 에러 이미지 기본 이미지로 바꾸기
             />
           ) : (
-            <img src={NoImgae} alt={item.title} className="CardListItem__img" />
+            <img src={DefaultImgae} alt={item.title} className="CardListItem__img" />
           )}
         </div>
         <div className="CardInfo">
-          <p className="CardInfo__time">{getElapsedTime(item.createrAt)}</p>
-          <h1 className="CardInfo__title">{item.description}</h1>
+          <p className="CardInfo__time">{getElapsedTime(creatTime)}</p>
+          <p className="CardInfo__title">{item.description ? item.description : item.title}</p>
           <p className="CardInfo__date">
             {year}. {month}. {day}
           </p>
         </div>
       </div>
     </Link>
+  
   );
 }
 
-function CardList() {
-  const CardListItems = useFetch(
-    "https://bootcamp-api.codeit.kr/api/sample/folder"
-  );
+function CardList({ url, folder = false}) {
+  const cardListItems = useFetch(url);
 
   return (
     <div className="cardList">
-      {CardListItems?.folder?.links.map((link) => {
-        return <CardListItem key={link.id} item={link} />;
-      })}
+      {cardListItems?.folder?.links.map((link) => (
+        <CardListItem key={link.id} item={link} />
+      ))}
+      {(cardListItems?.data?.length > 0)? (
+        cardListItems?.data?.map((link) => (
+          <CardListItem key={link.id} item={link}/>
+        ))
+      ) : (
+        (folder && <div className="NoDataList">저장된 링크가 없습니다.</div>)
+      )}
     </div>
   );
 }
+
 
 export default CardList;
