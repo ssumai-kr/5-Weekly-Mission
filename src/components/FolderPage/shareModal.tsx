@@ -1,4 +1,3 @@
-import React from "react";
 import ShareKakaotalk from "../../assets/ShareKakaotalk.svg";
 import ShareFacebook from "../../assets/ShareFacebook.svg";
 import linkImg from "../../assets/link.svg";
