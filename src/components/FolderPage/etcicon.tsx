@@ -5,7 +5,18 @@ import styles from "./etcicon.module.css";
 import { useState } from "react";
 import ShareModal from "./shareModal";
 
-function EtcIcon({ openModal, folderName, currentFolderId }) {
+interface Props {
+  openModal : (
+    about: string,
+    btn: string,
+    isDelete: boolean,
+    folderName? : string,
+  ) => void;
+  folderName : string;
+  currentFolderId : number | null;
+}
+
+function EtcIcon({ openModal, folderName, currentFolderId } : Props) {
   const [showShareModal, setShowShareModal] = useState(false);
 
   const openShareModal = () => {

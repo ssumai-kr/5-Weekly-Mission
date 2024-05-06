@@ -3,7 +3,19 @@ import styles from "./etcModal.module.css";
 import { useEffect } from "react";
 import CloseImg from "../../assets/_close.svg";
 
-function EtcModal({ modalAbout, onClick }) {
+interface ModalAbout {
+  about: string;
+  btn: string;
+  isDelete: boolean;
+  folderName: string;
+}
+
+interface EtcModalProps {
+  modalAbout: ModalAbout;
+  onClick: () => void;
+}
+
+function EtcModal({ modalAbout, onClick } : EtcModalProps) {
   const { about, btn, isDelete, folderName } = modalAbout;
 
   useEffect(() => {
