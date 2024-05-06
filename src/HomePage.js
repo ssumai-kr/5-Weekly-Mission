@@ -6,7 +6,7 @@ import Folder from "./folder";
 function HomePage() {
     return (
         <BrowserRouter>
-            <Routes path="/">
+            <Routes>
                 <Route path="/shared" element = {<App/>}/>      
                 <Route path="/folder" element = {<Folder/>}/>
             </Routes>

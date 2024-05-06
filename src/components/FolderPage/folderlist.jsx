@@ -30,6 +30,7 @@ function FolderList() {
       about : "",
       btn: "",
       isDelete : false,
+      folderName : "",
     }
   ); //모달 about
 
@@ -49,13 +50,14 @@ function FolderList() {
     setSelectedId(null); // 전체 버튼을 클릭할 때 선택된 아이템 ID를 null로 설정
   };
 
-  const openModal = (about, btn, isDelete) => {
+  const openModal = (about, btn, isDelete, folderName) => {
     setShowModal(true);
     setModalAbout((prev) => ({
       ...prev,
       about : about,
       btn : btn,
       isDelete : isDelete,
+      folderName : folderName,
     }))
   };
   const closeModal = () => {

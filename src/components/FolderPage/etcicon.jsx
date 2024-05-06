@@ -31,7 +31,7 @@ function EtcIcon({ openModal, folderName, currentFolderId }) {
         </button>
         <button
           className={styles.set}
-          onClick={() => openModal("폴더 삭제", "", true)}
+          onClick={() => openModal("폴더 삭제", "", true, folderName)}
         >
           <img src={DeleteImg} alt="삭제를 나타내는 이미지" />
           <span>삭제</span>
