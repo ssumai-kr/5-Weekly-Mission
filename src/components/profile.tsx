@@ -1,4 +1,4 @@
-import "./profile.css";
+import styles from "./profile.module.css";
 
 interface Props {
   email : string;
@@ -7,9 +7,9 @@ interface Props {
 
 function Profile({ email, img }: Props) {
   return (
-    <div className="profile">
-      <img src={img} className="profileImg" alt="프로필 이미지" />
-      <p className="profileEmail">{email}</p>
+    <div className={styles.profile}>
+      <img src={img} className={styles.profileImg} alt="프로필 이미지" />
+      <p className={styles.profileEmail}>{email}</p>
     </div>
   );
 }

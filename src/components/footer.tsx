@@ -1,4 +1,4 @@
-import "./footer.css";
+import styles from "./footer.module.css";
 import FacebookImg from "../assets/facebook.svg";
 import InstagramImg from "../assets/instagram.svg";
 import TwitterImg from "../assets/twitter.svg";
@@ -7,20 +7,20 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="footer">
-      <div className="footer__container">
-        <div className="footer__rights">
+    <footer className={styles.footer}>
+      <div className={styles.footer__container}>
+        <div className={styles.footer__rights}>
           <p>©codeit - 2024</p>
         </div>
-        <div className="footer__links">
-          <Link to="privacy.html" className="link-to_privacy">
+        <div className={styles.footer__links}>
+          <Link to="privacy.html" className={styles.link_to_privacy}>
             Privacy Policy
           </Link>
-          <Link to="faq.html" className="link-to_faq">
+          <Link to="faq.html" className={styles.link_to_faq}>
             FAQ
           </Link>
         </div>
-        <div className="footer-sns_link">
+        <div className={styles.footer_sns_link}>
           <Link target="_blank" to="https://www.facebook.com/">
             <img src={FacebookImg} alt="페이스북 연결 페이지" />
           </Link>
@@ -35,7 +35,7 @@ function Footer() {
           </Link>
         </div>
       </div>
-      <div className="footer__rights--mobile">
+      <div className={styles.footer__rights__mobile}>
         <p>©codeit - 2024</p>
       </div>
     </footer>

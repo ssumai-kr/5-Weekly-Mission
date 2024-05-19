@@ -1,4 +1,4 @@
-import "./cardlist.css";
+import styles from "./cardlist.module.css";
 import { useFetch } from "../usefetch";
 import DefaultImgae from "../assets/NoImage.svg";
 import { Link } from "react-router-dom";
@@ -78,40 +78,40 @@ function CardListItem({ item }: any) {
 
   return (
     <>
-      <div className="CardListItem">
+      <div className={styles.CardListItem}>
         <div className="CardListItem__imgs">
           {thumbnail ? (
             <img
               src={thumbnail}
               alt={item.title}
-              className="CardListItem__img"
+              className={styles.CardListItem__img}
               onError={onErrorImg} //404 에러 이미지 기본 이미지로 바꾸기
             />
           ) : (
             <img
               src={DefaultImgae}
               alt={item.title}
-              className="CardListItem__img"
+              className={styles.CardListItem__img}
             />
           )}
         </div>
         <Link
           to={item.url ? item.url : "/"}
           target="blank"
-          className="CardLink"
+          className={styles.CardLink}
         >
-          <div className="CardInfo">
-            <p className="CardInfo__time">{getElapsedTime(creatTime)}</p>
-            <p className="CardInfo__title">
+          <div className={styles.CardInfo}>
+            <p className={styles.CardInfo__time}>{getElapsedTime(creatTime)}</p>
+            <p className={styles.CardInfo__title}>
               {item.description ? item.description : item.title}
             </p>
-            <p className="CardInfo__date">
+            <p className={styles.CardInfo__date}>
               {year}. {month}. {day}
             </p>
             <img
               src={KebabImg}
               alt="카드 케밥 버튼 이미지"
-              className="KebabImg"
+              className={styles.KebabImg}
               onClick={(e) => {
                 e.stopPropagation(); // 상위 링크 클릭 방지
                 e.preventDefault(); // 기본 링크 이벤트 방지
@@ -124,7 +124,7 @@ function CardListItem({ item }: any) {
           </div>
         </Link>
 
-        <img src={StarImg} alt="즐겨찾기 버튼 이미지" className="StarImg"></img>
+        <img src={StarImg} alt="즐겨찾기 버튼 이미지" className={styles.StarImg}></img>
       </div>
     </>
   );
@@ -139,7 +139,7 @@ function CardList({ url , folder = false } : CardListProps) {
   const cardListItems = useFetch(url);
 
   return (
-    <div className="cardList">
+    <div className={styles.cardList}>
       {cardListItems?.folder?.links.map((link: any) => (
         <CardListItem key={link.id} item={link} />
       ))}
@@ -147,7 +147,7 @@ function CardList({ url , folder = false } : CardListProps) {
         ? cardListItems?.data?.map((link : any) => (
             <CardListItem key={link.id} item={link} />
           ))
-        : folder && <div className="NoDataList">저장된 링크가 없습니다.</div>}
+        : folder && <div className={styles.NoDataList}>저장된 링크가 없습니다.</div>}
     </div>
   );
 }

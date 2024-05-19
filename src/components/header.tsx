@@ -2,7 +2,7 @@ import Icon from "../assets/icon.png";
 import { Link } from "react-router-dom";
 import Profile from "./profile";
 import { useFetch } from "../usefetch";
-import './header.css';
+import styles from './header.module.css';
 
 function Header() {
   const profileData
@@ -10,10 +10,10 @@ function Header() {
 
   
   return (
-    <div className="header">
-      <div className="header__container">
+    <div className={styles.header}>
+      <div className={styles.header__container}>
         <Link to="/">
-          <img src={Icon} alt="Linkbrary 로고" className="header__container--logo"/>
+          <img src={Icon} alt="Linkbrary 로고" className={styles.header__container__logo}/>
         </Link>
         {profileData ? (
           <Profile email={profileData.email} img={profileData.profileImageSource}/> 
