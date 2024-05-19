@@ -136,7 +136,8 @@ function CardList({ url, searchValue, folder = false }: CardListProps) {
   const cardListItems = useFetch(url);
 
   const lowerSearchValue = searchValue.toLowerCase();
-
+ 
+  //folder 페이지
   const filteredItems = cardListItems?.data?.filter((item: any) => {
     const title = item.title?.toLowerCase() || "";
     const url = item.url?.toLowerCase() || "";
@@ -144,6 +145,7 @@ function CardList({ url, searchValue, folder = false }: CardListProps) {
     return title.includes(lowerSearchValue) || url.includes(lowerSearchValue) || description.includes(lowerSearchValue);
   });
 
+  //shared 페이지
   const filteredFolderItems = cardListItems?.folder?.links?.filter((item: any) => {
     const title = item.title?.toLowerCase() || "";
     const url = item.url?.toLowerCase() || "";
