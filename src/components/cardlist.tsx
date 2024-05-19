@@ -1,6 +1,6 @@
 import styles from "./cardlist.module.css";
 import { useFetch } from "../usefetch";
-import DefaultImgae from "../assets/NoImage.svg";
+import DefaultImage from "../assets/NoImage.svg";
 import { Link } from "react-router-dom";
 import StarImg from "../assets/star.svg";
 import KebabImg from "../assets/kebab.svg";
@@ -23,7 +23,7 @@ export const TIME_IN_MILLISECONDS = {
   year,
 };
 
-export const getElapsedTime = (createdAt : number) => {
+export const getElapsedTime = (createdAt: number) => {
   const now: number = Date.now();
   const createdAtDate: number = new Date(createdAt).getTime();
   const elapsedTime = now - createdAtDate;
@@ -66,85 +66,98 @@ function CardListItem({ item }: any) {
   const year = creatDate.getFullYear();
   const month = creatDate.getMonth() + 1;
   const day = creatDate.getDate();
-  
+
   const thumbnail = item.imageSource ? item.imageSource : item.image_source;
 
-  const onErrorImg = (e : any) => {
-    e.target.src = DefaultImgae;
+  const onErrorImg = (e: any) => {
+    e.target.src = DefaultImage;
   };
   const closeKebab = () => {
     setShowkebab(false);
-  }
+  };
 
   return (
-    <>
-      <div className={styles.CardListItem}>
-        <div className="CardListItem__imgs">
-          {thumbnail ? (
-            <img
-              src={thumbnail}
-              alt={item.title}
-              className={styles.CardListItem__img}
-              onError={onErrorImg} //404 에러 이미지 기본 이미지로 바꾸기
-            />
-          ) : (
-            <img
-              src={DefaultImgae}
-              alt={item.title}
-              className={styles.CardListItem__img}
-            />
-          )}
-        </div>
-        <Link
-          to={item.url ? item.url : "/"}
-          target="blank"
-          className={styles.CardLink}
-        >
-          <div className={styles.CardInfo}>
-            <p className={styles.CardInfo__time}>{getElapsedTime(creatTime)}</p>
-            <p className={styles.CardInfo__title}>
-              {item.description ? item.description : item.title}
-            </p>
-            <p className={styles.CardInfo__date}>
-              {year}. {month}. {day}
-            </p>
-            <img
-              src={KebabImg}
-              alt="카드 케밥 버튼 이미지"
-              className={styles.KebabImg}
-              onClick={(e) => {
-                e.stopPropagation(); // 상위 링크 클릭 방지
-                e.preventDefault(); // 기본 링크 이벤트 방지
-                setShowkebab(!showKebab);
-              }}
-            ></img>
-            {showKebab && (
-              <CardKebab closeKebab={closeKebab}></CardKebab>
-            )}
-          </div>
-        </Link>
-
-        <img src={StarImg} alt="즐겨찾기 버튼 이미지" className={styles.StarImg}></img>
+    <div className={styles.CardListItem}>
+      <div className={styles.CardListItem__imgs}>
+        {thumbnail ? (
+          <img
+            src={thumbnail}
+            alt={item.title}
+            className={styles.CardListItem__img}
+            onError={onErrorImg} // 404 에러 이미지 기본 이미지로 바꾸기
+          />
+        ) : (
+          <img
+            src={DefaultImage}
+            alt={item.title}
+            className={styles.CardListItem__img}
+          />
+        )}
       </div>
-    </>
+      <Link
+        to={item.url ? item.url : "/"}
+        target="_blank"
+        className={styles.CardLink}
+      >
+        <div className={styles.CardInfo}>
+          <p className={styles.CardInfo__time}>{getElapsedTime(creatTime)}</p>
+          <p className={styles.CardInfo__title}>
+            {item.description ? item.description : item.title}
+          </p>
+          <p className={styles.CardInfo__date}>
+            {year}. {month}. {day}
+          </p>
+          <img
+            src={KebabImg}
+            alt="카드 케밥 버튼 이미지"
+            className={styles.KebabImg}
+            onClick={(e) => {
+              e.stopPropagation(); // 상위 링크 클릭 방지
+              e.preventDefault(); // 기본 링크 이벤트 방지
+              setShowkebab(!showKebab);
+            }}
+          />
+          {showKebab && <CardKebab closeKebab={closeKebab} />}
+        </div>
+      </Link>
+
+      <img src={StarImg} alt="즐겨찾기 버튼 이미지" className={styles.StarImg} />
+    </div>
   );
 }
 
 interface CardListProps {
-  url : string;
-  folder? : boolean;
+  url: string;
+  searchValue: string;
+  folder?: boolean;
 }
 
-function CardList({ url , folder = false } : CardListProps) {
+function CardList({ url, searchValue, folder = false }: CardListProps) {
   const cardListItems = useFetch(url);
+
+  const lowerSearchValue = searchValue.toLowerCase();
+
+  const filteredItems = cardListItems?.data?.filter((item: any) => {
+    const title = item.title?.toLowerCase() || "";
+    const url = item.url?.toLowerCase() || "";
+    const description = item.description?.toLowerCase() || "";
+    return title.includes(lowerSearchValue) || url.includes(lowerSearchValue) || description.includes(lowerSearchValue);
+  });
+
+  const filteredFolderItems = cardListItems?.folder?.links?.filter((item: any) => {
+    const title = item.title?.toLowerCase() || "";
+    const url = item.url?.toLowerCase() || "";
+    const description = item.description?.toLowerCase() || "";
+    return title.includes(lowerSearchValue) || url.includes(lowerSearchValue) || description.includes(lowerSearchValue);
+  });
 
   return (
     <div className={styles.cardList}>
-      {cardListItems?.folder?.links.map((link: any) => (
+      {filteredFolderItems?.map((link: any) => (
         <CardListItem key={link.id} item={link} />
       ))}
-      {cardListItems?.data?.length > 0
-        ? cardListItems?.data?.map((link : any) => (
+      {filteredItems?.length > 0
+        ? filteredItems.map((link: any) => (
             <CardListItem key={link.id} item={link} />
           ))
         : folder && <div className={styles.NoDataList}>저장된 링크가 없습니다.</div>}

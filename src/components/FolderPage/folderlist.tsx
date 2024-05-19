@@ -35,7 +35,12 @@ function FolderListItem({ children, value, onClick, isActive }: ItemProps) {
   );
 }
 
-function FolderList() {
+
+interface FolderListProps {
+  searchValue: string;
+}
+
+function FolderList({searchValue} : FolderListProps) {
   const [title, setTitle] = useState("전체");
   const [selectedId, setSelectedId] = useState<number | null>(null); // 새로운 상태 변수 추가
   const [showModal, setShowModal] = useState(false); //모달 on/off
@@ -127,9 +132,9 @@ function FolderList() {
           )}
         </div>
         {title === "전체" ? (
-          <CardList url={total_folders_url} folder={true} />
+          <CardList url={total_folders_url} searchValue={searchValue} folder={true} />
         ) : (
-          <CardList url={other_folders_links} folder={true} />
+          <CardList url={other_folders_links} searchValue={searchValue} folder={true} />
         )}
       </div>
       {showModal && (
