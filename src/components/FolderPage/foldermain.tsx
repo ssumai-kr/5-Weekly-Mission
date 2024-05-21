@@ -1,5 +1,5 @@
 import FolderList from "./folderlist";
-import SearchBar from "../SharedPage/searchbar";
+import SearchBar from "@/src/components/searchbar/searchbar";
 import styles from "./foldermain.module.css";
 import { useState , ChangeEvent} from "react";
 

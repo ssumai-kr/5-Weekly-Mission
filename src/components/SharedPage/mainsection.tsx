@@ -1,5 +1,5 @@
 import SearchBar from "./searchbar";
-import CardList from "../cardlist";
+import CardList from "@/src/components/cardlist/cardlist";
 import styles from "./mainsection.module.css";
 import { useState, ChangeEvent } from "react";
 
